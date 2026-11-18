@@ -125,15 +125,15 @@ def test_book_details_match_homepage(browser):
     all_prices = []
     all_links = []
 
-    for knjiga in books:
+    for book in books:
 
-        naslov = knjiga.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
-        all_titles.append(naslov)
+        title = book.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("title")
+        all_titles.append(title)
 
-        cena = knjiga.find_element(By.CSS_SELECTOR, ".price_color").text
-        all_prices.append(cena)
+        price = book.find_element(By.CSS_SELECTOR, ".price_color").text
+        all_prices.append(price)
 
-        href = knjiga.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("href")
+        href = book.find_element(By.CSS_SELECTOR, "h3 a").get_attribute("href")
         all_links.append(href)
 
     
@@ -142,9 +142,9 @@ def test_book_details_match_homepage(browser):
         browser.get(all_links[i])
 
         
-        stvarni_naslov = browser.find_element(By.CSS_SELECTOR, "h1").text
+        title_on_page = browser.find_element(By.CSS_SELECTOR, "h1").text
 
-        assert all_titles[i] == stvarni_naslov
+        assert all_titles[i] == title_on_page
 
         
         stvarna_cena = browser.find_element(By.CSS_SELECTOR, ".price_color").text
